@@ -1,6 +1,23 @@
 <?php
+require_once __DIR__ . '/../../app/Classes/VehicleManager.php';
 
-include './header.php';
+use App\Classes\VehicleManager;
+
+$manager = new VehicleManager();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = [
+        "name" => $_POST['name'],
+        "type" => $_POST['type'],
+        "price" => $_POST['price'],
+        "image" => $_POST['image']
+    ];
+    $manager->addVehicle($data);
+    header("Location: ../index.php");
+    exit;
+}
+
+include __DIR__ . '/header.php';
 ?>
 
 <div class="container my-4">
@@ -23,12 +40,6 @@ include './header.php';
             <input type="text" name="image" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Add Vehicle</button>
+        <a href="../index.php" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
-
-</body>
-</html>
-
-
-
-    

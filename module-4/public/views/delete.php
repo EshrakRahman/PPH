@@ -1,16 +1,14 @@
 <?php
+require_once __DIR__ . '/../../app/Classes/VehicleManager.php';
 
-include './header.php';
-?>
+use App\Classes\VehicleManager;
 
-<div class="container my-4">
-    <h1>Delete Vehicle</h1>
-    <p>Are you sure you want to delete <strong></strong>?</p>
-    <form method="POST">
-        <button type="submit" name="confirm" value="yes" class="btn btn-danger">Yes, Delete</button>
-        <a href="../index.php" class="btn btn-secondary">Cancel</a>
-    </form>
-</div>
+$manager = new VehicleManager();
+$id = $_GET['id'] ?? null;
 
-</body>
-</html>
+if ($id) {
+    $manager->deleteVehicle($id);
+}
+
+header("Location: ../index.php");
+exit;
